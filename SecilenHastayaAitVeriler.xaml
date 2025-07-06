@@ -1,0 +1,126 @@
+﻿<Window x:Class="DiyabetTakipSistemi.SecilenHastayaAitVeriler"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="Hasta Detayları"
+        Width="1300" Height="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#fdfefe">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Başlık ve profil resmi -->
+            <RowDefinition Height="2*"/>
+            <!-- Ana içerik -->
+            <RowDefinition Height="1*"/>
+            <!-- Grafik -->
+        </Grid.RowDefinitions>
+
+        <!-- Hasta Profil Resmi ve Başlık -->
+        <DockPanel Grid.Row="0" LastChildFill="False" Margin="0,0,0,20">
+            <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="8" Background="White" Padding="5" Margin="0,0,25,0">
+                <Image x:Name="imgHastaProfil" Width="140" Height="140" Stretch="UniformToFill"/>
+            </Border>
+            <TextBlock VerticalAlignment="Center" FontSize="26" FontWeight="Bold" Text="Hasta Günlük Takip Ekranı"/>
+        </DockPanel>
+
+        <!-- Ana İçerik -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Sol Üst: Günlük Veriler -->
+            <GroupBox Grid.Row="0" Grid.Column="0" Header="🩺 Günlük Veriler" FontWeight="Bold" FontSize="15"
+                      Background="#f0f8ff" BorderBrush="#dbe9f4" Padding="12" Margin="0,0,10,10">
+                <DataGrid x:Name="dgGunlukVeriler" 
+                          AutoGenerateColumns="True" 
+                          IsReadOnly="True"
+                          Background="#ffffff" 
+                          RowBackground="#f7fbff"
+                          GridLinesVisibility="Horizontal"
+                          Margin="0"/>
+            </GroupBox>
+
+            <!-- Sol Alt: Uyarılar ve Doktora Mesajları -->
+            <GroupBox Grid.Row="1" Grid.Column="0" Header="⚠️ Uyarılar ve Mesajlar" FontWeight="Bold" FontSize="15"
+                      Background="#fffafa" BorderBrush="#f5c2c2"
+                      Padding="12" Margin="0,0,10,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="⚠️ Uyarı:" 
+                                   Margin="0,0,0,5" FontWeight="SemiBold"/>
+                        <TextBox x:Name="txtUyari" Grid.Row="1"
+                                 TextWrapping="Wrap" IsReadOnly="True"
+                                 AcceptsReturn="True" Background="#fff0f0" BorderBrush="#ffaaaa"
+                                 Padding="5" MinHeight="120" MaxHeight="180" VerticalScrollBarVisibility="Auto"
+                                 Margin="0,0,0,15"/>
+
+                        <TextBlock Grid.Row="2" Text="💬 Doktora Mesaj:" 
+                                   Margin="0,0,0,5" FontWeight="SemiBold"/>
+                        <TextBox x:Name="txtDoktorMesaj" Grid.Row="3"
+                                 TextWrapping="Wrap" IsReadOnly="True"
+                                 AcceptsReturn="True" Background="#f0faff" BorderBrush="#a8dfff"
+                                 Padding="5" MinHeight="120" MaxHeight="180" VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+                </ScrollViewer>
+            </GroupBox>
+
+            <!-- Sağ Panel: Planlar ve Belirtiler -->
+            <GroupBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Header="📝 Planlar ve Belirtiler" FontWeight="Bold" FontSize="15"
+                      Background="#fefefe" BorderBrush="#e0e0e0"
+                      Padding="12" Margin="0">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,15">
+                            <TextBlock Text="Egzersiz Planı:" 
+                                       Margin="0,0,0,5" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtEgzersiz"
+                                     TextWrapping="Wrap" IsReadOnly="True"
+                                     AcceptsReturn="True" Background="#f2faff" BorderBrush="#cce7ff"
+                                     Padding="5" MinHeight="80" MaxHeight="120" VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,15">
+                            <TextBlock Text="Diyet Planı:" 
+                                       Margin="0,0,0,5" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtDiyet"
+                                     TextWrapping="Wrap" IsReadOnly="True"
+                                     AcceptsReturn="True" Background="#fefaf2" BorderBrush="#ffe2b2"
+                                     Padding="5" MinHeight="80" MaxHeight="120" VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Belirtiler:" 
+                                       Margin="0,0,0,5" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtBelirti"
+         TextWrapping="Wrap" IsReadOnly="True"
+         AcceptsReturn="True" Background="#fff0f5" BorderBrush="#ffcad4"
+         Padding="5" MinHeight="80" MaxHeight="120" VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+
+        <!-- Grafik Alanı -->
+        <GroupBox Header="📊 Kan Şekeri Grafiği" FontWeight="Bold" FontSize="15"
+                  Grid.Row="2" Padding="12" Background="#fff">
+            <lvc:CartesianChart x:Name="GrafikChart" LegendLocation="Right"/>
+        </GroupBox>
+    </Grid>
+</Window>

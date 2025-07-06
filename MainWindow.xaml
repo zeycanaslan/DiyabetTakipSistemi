@@ -1,0 +1,48 @@
+﻿<Window x:Class="DiyabetTakipSistemi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Diyabet Takip Sistemi" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#EDF2F7"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid>
+        <Border Background="White"
+                CornerRadius="20"
+                Padding="30"
+                Margin="50"
+                >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                <!-- Başlık -->
+                <TextBlock Text="🩺 Diyabet Takip Sistemi" 
+                           FontSize="28" 
+                           FontWeight="Bold"
+                           Foreground="#2A4759"
+                           Margin="0,0,0,30"
+                           HorizontalAlignment="Center"/>
+
+                <!-- Doktor Girişi -->
+                <Button Content="👩‍⚕️ Doktor Girişi" 
+                        Width="220" Height="50"
+                        Background="#3E8E7E" Foreground="White"
+                        FontSize="16" FontWeight="SemiBold"
+                        Margin="0,0,0,15"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        
+                        Click="BtnDoktorGiris_Click"/>
+
+                <!-- Hasta Girişi -->
+                <Button Content="👤 Hasta Girişi" 
+                        Width="220" Height="50"
+                        Background="#3E8E7E" Foreground="White"
+                        FontSize="16" FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        
+                        Click="BtnHastaGiris_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

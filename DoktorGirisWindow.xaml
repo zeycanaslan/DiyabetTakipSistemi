@@ -1,0 +1,65 @@
+﻿<Window x:Class="DiyabetTakipSistemi.DoktorGirisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Doktor Paneli" Height="500" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#f0f4f8"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid>
+        <Border Background="White"
+                CornerRadius="20"
+                Padding="30"
+                Margin="50">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+                <!-- Profil Fotoğrafı -->
+                <Image x:Name="imgProfil" Width="130" Height="130" 
+                       Margin="0,0,0,15"
+                       Stretch="UniformToFill"
+                       ClipToBounds="True"
+                       SnapsToDevicePixels="True"
+                       HorizontalAlignment="Center"
+                       />
+
+                <!-- Hoş Geldin Yazısı -->
+                <TextBlock x:Name="txtHosgeldin"
+                           Text="Hoş Geldiniz, Doktor!"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#2C3E50"
+                           TextAlignment="Center"
+                           Margin="0,0,0,30"
+                           HorizontalAlignment="Center"/>
+
+                <!-- Hastalarımı Görüntüle -->
+                <Button x:Name="BtnHastalarimiGor"
+                        Content="🩺 Hastalarımı Görüntüle" 
+                        Width="240" Height="50"
+                        Margin="0,0,0,15"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Background="#2980B9" 
+                        Foreground="White"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        Click="BtnHastalarimiGor_Click"/>
+
+                <!-- Hasta Ekle -->
+                <Button x:Name="BtnHastaEkle"
+                        Content="➕ Hasta Ekle"
+                        Width="240" Height="50"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Background="#27AE60"
+                        Foreground="White"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        Click="BtnHastaEkle_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

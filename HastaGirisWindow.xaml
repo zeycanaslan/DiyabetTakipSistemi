@@ -1,0 +1,30 @@
+﻿<Window x:Class="DiyabetTakipSistemi.HastaGirisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hasta Paneli" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#f5f6fa">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sol Menü -->
+        <StackPanel Background="#2c3e50" Grid.Column="0"  >
+            <TextBlock Text="👤 Hasta Paneli" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" />
+
+            <Button Content="📥 Günlük Veri Girişi" Click="BtnVeriGiris_Click" Margin="0,10" Height="40"/>
+            <Button Content="📊 Kan Şekeri Raporu" Click="BtnRapor_Click" Margin="0,10" Height="40"/>
+            <Button Content="💉 İnsülin Takibi" Click="BtnInsulin_Click" Margin="0,10" Height="40"/>
+            <Button Content=" Egzersiz Diyet ve Belirti Takibi" Click="BtnEgzrszDytTkp_Click" Margin="0,10" Height="40"/>
+        </StackPanel>
+
+        <!-- Sağ İçerik Paneli -->
+        <Grid Grid.Column="1" Margin="20">
+            <!-- Burada dinamik içerikler UserControl olarak yüklenecek -->
+            <ContentControl x:Name="MainContentArea"/>
+        </Grid>
+    </Grid>
+</Window>

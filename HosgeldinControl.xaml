@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="DiyabetTakipSistemi.HosgeldinControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <!-- Gradient Brushes -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#f8fbff" Offset="0"/>
+            <GradientStop Color="#e3f2fd" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="CardGradient" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#ffffff" Offset="0"/>
+            <GradientStop Color="#fafafa" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="WelcomeGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#e8f5e8" Offset="0"/>
+            <GradientStop Color="#f0f8ff" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Drop Shadow Effect -->
+        <DropShadowEffect x:Key="CardShadow" Color="#40000000" BlurRadius="15" 
+                         ShadowDepth="5" Direction="315" Opacity="0.3"/>
+
+        <!-- Storyboard Animations -->
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                           From="0" To="1" Duration="0:0:0.8"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" 
+                           From="20" To="0" Duration="0:0:0.6"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid Background="{StaticResource BackgroundGradient}">
+        <Grid.RenderTransform>
+            <TranslateTransform/>
+        </Grid.RenderTransform>
+
+        <!-- Ana Kart -->
+        <Border Background="{StaticResource CardGradient}" 
+                CornerRadius="25" 
+                Padding="35" 
+                BorderBrush="#e1e8ed" 
+                BorderThickness="1"
+                Effect="{StaticResource CardShadow}"
+                Margin="30">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Başlık Bölümü -->
+                <TextBlock Grid.Row="0" 
+                          Text="👋 Hoş Geldiniz" 
+                          FontSize="32" 
+                          FontWeight="Light" 
+                          Foreground="#1a237e" 
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,30"/>
+
+                <!-- İçerik Bölümü -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Profil Resmi Bölümü -->
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <!-- Profil Resmi Container -->
+                        <Border Width="200" Height="200" 
+                                CornerRadius="100"
+                                BorderBrush="#3f51b5" 
+                                BorderThickness="4" 
+                                Background="White"
+                                HorizontalAlignment="Center"
+                                Effect="{StaticResource CardShadow}">
+                            <Border CornerRadius="96" ClipToBounds="True">
+                                <Image x:Name="imgProfil" 
+                                       Stretch="UniformToFill" 
+                                       ClipToBounds="True">
+                                    <!-- Varsayılan avatar için placeholder -->
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <Trigger Property="Source" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Border>
+                        </Border>
+
+                        <!-- Avatar placeholder (resim yoksa) -->
+                        <Border Width="200" Height="200" 
+                                CornerRadius="100"
+                                Background="#e3f2fd"
+                                HorizontalAlignment="Center"
+                                Margin="0,-200,0,0">
+                            <TextBlock Text="👤" 
+                                       FontSize="80" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Opacity="0.7"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Source={x:Reference imgProfil}, Path=Source}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Bilgiler Bölümü -->
+                    <StackPanel Grid.Column="1" 
+                                Margin="50,20,20,20" 
+                                VerticalAlignment="Center">
+
+                        <!-- Ad Soyad -->
+                        <Border Background="White" 
+                                CornerRadius="12" 
+                                Padding="20,15" 
+                                Margin="0,0,0,15"
+                                BorderBrush="#e0e7ff"
+                                BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock x:Name="txtAdSoyad" 
+                                          FontSize="20"
+                                          TextTrimming="CharacterEllipsis"
+                                          FontWeight="SemiBold" 
+                                          Foreground="#1f2937"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Diğer Bilgiler -->
+                        <UniformGrid Columns="2" Margin="0,0,0,20">
+                            <!-- Doğum Tarihi -->
+                            <Border Background="White" 
+                                    CornerRadius="12" 
+                                    Padding="15,12" 
+                                    Margin="0,0,8,8"
+                                    BorderBrush="#e0e7ff"
+                                    BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock x:Name="txtDogumTarihi" 
+                                       FontSize="16" 
+                                       Foreground="#374151"
+                                       FontWeight="Medium"
+                                       TextWrapping="Wrap"
+                                       MinHeight="24" />
+
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Yaş -->
+                            <Border Background="White" 
+                                    CornerRadius="12" 
+                                    Padding="15,12" 
+                                    Margin="8,0,0,8"
+                                    BorderBrush="#e0e7ff"
+                                    BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="📊 Yaş" 
+                                              FontSize="12" 
+                                              Foreground="#6b7280" 
+                                              Margin="0,0,0,3"/>
+                                    <TextBlock x:Name="txtYas" 
+                                              FontSize="16" 
+                                              Foreground="#374151"
+                                              FontWeight="Medium"/>
+                                </StackPanel>
+                            </Border>
+                        </UniformGrid>
+
+                        <!-- Email -->
+                        <Border Background="White" 
+                                CornerRadius="12" 
+                                Padding="20,15" 
+                                Margin="0,0,0,20"
+                                BorderBrush="#e0e7ff"
+                                BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock x:Name="txtEmail" 
+                                          FontSize="16" 
+                                          Foreground="#374151"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Hoş Geldin Mesajı -->
+                        <Border Background="{StaticResource WelcomeGradient}" 
+                                Padding="25,20" 
+                                CornerRadius="15" 
+                                BorderBrush="#c8e6c9"
+                                BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock Text="🌟 Sistem Durumu" 
+                                          FontSize="16" 
+                                          FontWeight="SemiBold"
+                                          Foreground="#2e7d32" 
+                                          Margin="0,0,0,8"/>
+                                <TextBlock Text="Sistem aktif ve hazır! Sol menüden tüm işlemlerinize kolayca erişebilir, sağlık verilerinizi takip edebilirsiniz." 
+                                          FontSize="15" 
+                                          Foreground="#388e3c" 
+                                          TextWrapping="Wrap"
+                                          LineHeight="22"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

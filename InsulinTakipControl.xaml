@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="DiyabetTakipSistemi.InsulinTakipControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DiyabetTakipSistemi"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Filtreleme alanı -->
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <Label Content="Başlangıç Tarihi:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpBaslangic" Margin="5 0"/>
+            <Label Content="Bitiş Tarihi:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpBitis" Margin="5 0"/>
+            <Button Content="Filtrele" Click="BtnFiltrele_Click" Margin="10 0"/>
+        </StackPanel>
+
+        <!-- Grafik alanı -->
+        <Canvas x:Name="grafikCanvas" Grid.Row="1" Height="180" Background="LightGray" Margin="0,0,0,10"/>
+
+        <!-- Veri tablosu -->
+        <DataGrid x:Name="dgInsulinVerileri" Grid.Row="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tarih" Binding="{Binding Tarih}"/>
+                <DataGridTextColumn Header="Zaman Dilimi" Binding="{Binding ZamanDilimi}"/>
+                <DataGridTextColumn Header="Önerilen İnsülin" Binding="{Binding OnerilenInsulin}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
