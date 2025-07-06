@@ -271,13 +271,13 @@ namespace DiyabetTakipSistemi
             try
             {
                     MailMessage mail = new MailMessage();
-                    mail.From = new MailAddress("zeyacnaslan7@gmail.com");
+                    mail.From = new MailAddress("example@gmail.com");
                     mail.To.Add(eposta);
                     mail.Subject = "Kayıt Bilgileriniz";
                     mail.Body = $"Sayın {ad} {soyad},\n\nSisteme kaydınız başarıyla yapılmıştır.\n\nTC Kimlik No: {tc}\nGeçici Şifre: {sifre}\n\nLütfen giriş yaptıktan sonra şifrenizi değiştiriniz.\n\nİyi günler dileriz.";
 
                     SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                    smtp.Credentials = new NetworkCredential("zeycanaslan7@gmail.com", "znzg jxqo eami gmxv\r\n");
+                    smtp.Credentials = new NetworkCredential("example@gmail.com", "google sifresi");
                     smtp.EnableSsl = true;
                     smtp.Send(mail);
                 }
